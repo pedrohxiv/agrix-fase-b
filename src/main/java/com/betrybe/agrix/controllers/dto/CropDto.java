@@ -1,10 +1,17 @@
 package com.betrybe.agrix.controllers.dto;
 
 import com.betrybe.agrix.models.entities.Crop;
+import java.time.LocalDate;
 
 /** Crop DTO record. */
-public record CropDto(Long id, String name, Double plantedArea, Long farmId) {
+public record CropDto(
+    Long id,
+    String name,
+    Double plantedArea,
+    LocalDate plantedDate,
+    LocalDate harvestDate,
+    Long farmId) {
   public Crop toCrop() {
-    return new Crop(id, name, plantedArea, null);
+    return new Crop(id, name, plantedArea, plantedDate, harvestDate, null);
   }
 }

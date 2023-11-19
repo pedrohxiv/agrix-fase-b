@@ -80,6 +80,8 @@ public class FarmController {
         newCrop.getId(),
         newCrop.getName(),
         newCrop.getPlantedArea(),
+        newCrop.getPlantedDate(),
+        newCrop.getHarvestDate(),
         newCrop.getFarm().getId()));
   }
 
@@ -99,6 +101,8 @@ public class FarmController {
             crop.getId(),
             crop.getName(),
             crop.getPlantedArea(),
+            crop.getPlantedDate(),
+            crop.getHarvestDate(),
             crop.getFarm().getId()))
         .collect(Collectors.toList());
   }
