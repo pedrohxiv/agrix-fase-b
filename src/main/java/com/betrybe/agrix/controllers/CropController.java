@@ -71,7 +71,7 @@ public class CropController {
   }
 
   /** GET crops in interval method. */
-  @GetMapping("/search")
+  @GetMapping(value = "/search")
   public List<CropDto> getCropsInInterval(
       @RequestParam LocalDate start,
       @RequestParam LocalDate end) {
@@ -89,7 +89,7 @@ public class CropController {
   }
 
   /** POST associate crop and fertilizer method. */
-  @PostMapping("/{cropId}/fertilizers/{fertilizerId}")
+  @PostMapping(value = "/{cropId}/fertilizers/{fertilizerId}")
   public ResponseEntity<String> associateCropAndFertilizer(
       @PathVariable Long cropId,
       @PathVariable Long fertilizerId) {
@@ -112,6 +112,20 @@ public class CropController {
 
     return ResponseEntity.status(HttpStatus.CREATED).body(
         "Fertilizante e plantação associados com sucesso!");
+  }
+
+  /** GET fertilizers associated to crop method. */
+  @GetMapping(value = "{cropId}/fertilizers")
+  public List<Fertilizer> getFertilizers(@PathVariable Long cropId) {
+    Optional<Crop> optionalCrop = cropService.getCropById(cropId);
+
+    if (optionalCrop.isEmpty()) {
+      throw new NotFoundException("Plantação não encontrada!");
+    }
+
+    Crop crop = optionalCrop.get();
+
+    return crop.getFertilizers();
   }
 
   /** Exception handler. */
