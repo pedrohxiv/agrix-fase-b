@@ -1,8 +1,10 @@
 package com.betrybe.agrix.services;
 
+import com.betrybe.agrix.models.entities.Farm;
 import com.betrybe.agrix.models.entities.Fertilizer;
 import com.betrybe.agrix.models.repositories.FertilizerRepository;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +28,10 @@ public class FertilizerService {
   /** Get all fertilizers method. */
   public List<Fertilizer> getAllFertilizers() {
     return fertilizerRepository.findAll();
+  }
+
+  /** Get fertilizer by ID method. */
+  public Optional<Fertilizer> getFertilizerById(Long fertilizerId) {
+    return fertilizerRepository.findById(fertilizerId);
   }
 }
