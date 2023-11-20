@@ -1,6 +1,5 @@
 package com.betrybe.agrix.services;
 
-import com.betrybe.agrix.models.entities.Farm;
 import com.betrybe.agrix.models.entities.Fertilizer;
 import com.betrybe.agrix.models.repositories.FertilizerRepository;
 import java.util.List;
