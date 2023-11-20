@@ -4,6 +4,7 @@ import com.betrybe.agrix.controllers.dto.CropDto;
 import com.betrybe.agrix.controllers.exceptions.NotFoundException;
 import com.betrybe.agrix.models.entities.Crop;
 import com.betrybe.agrix.services.CropService;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /** Crop controller class. */
@@ -61,6 +63,24 @@ public class CropController {
         crop.getPlantedDate(),
         crop.getHarvestDate(),
         crop.getFarm().getId()));
+  }
+
+  /** GET crops in interval method. */
+  @GetMapping("/search")
+  public List<CropDto> getCropsInInterval(
+      @RequestParam LocalDate start,
+      @RequestParam LocalDate end) {
+    List<Crop> cropsInInterval = cropService.getCropsInInterval(start, end);
+
+    return cropsInInterval.stream()
+        .map(crop -> new CropDto(
+            crop.getId(),
+            crop.getName(),
+            crop.getPlantedArea(),
+            crop.getPlantedDate(),
+            crop.getHarvestDate(),
+            crop.getFarm().getId()))
+        .collect(Collectors.toList());
   }
 
   /** Exception handler. */
