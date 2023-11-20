@@ -12,6 +12,6 @@ public record CropDto(
     LocalDate harvestDate,
     Long farmId) {
   public Crop toCrop() {
-    return new Crop(id, name, plantedArea, plantedDate, harvestDate, null);
+    return new Crop(id, name, plantedArea, plantedDate, harvestDate, null, null);
   }
 }
